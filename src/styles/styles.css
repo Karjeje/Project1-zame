@@ -4,7 +4,37 @@
   margin: 0;
 }
 
+html {
+  height: 100%;
+}
+
 body {
   font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-color: rgb(227, 227, 227);
+}
+
+.container {
+  display: flex;
+  gap: 20px;
+}
+
+.progress,
+.activities {
+  width: 400px;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: black;
+  color: white;
+  border-radius: 50px;
+  font-size: 40px;
+}
+
+a {
+  text-decoration: none;
 }
