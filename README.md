@@ -1,1 +1,1 @@
-# webpack-template
+My first project. A webpage where I will log my activities and progress.
