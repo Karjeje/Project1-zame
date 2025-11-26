@@ -61,6 +61,11 @@ saveBtn.addEventListener("click", () => {
   render();
 });
 
+//Helper functions
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
 //Render filters
 function renderFilters(activities) {
   const types = ["All", ...new Set(activities.map((a) => a.type))];
@@ -69,7 +74,7 @@ function renderFilters(activities) {
   types.forEach((type) => {
     const btn = document.createElement("div");
     btn.classList.add("filter");
-    btn.textContent = type;
+    btn.textContent = capitalize(type);
 
     btn.addEventListener("click", () => {
       render(type === "All" ? null : type);
@@ -90,7 +95,7 @@ function renderList(activities) {
       item.classList.add("activity-item");
 
       item.innerHTML = `
-        <div class="activity-type">${a.type}</div>
+        <div class="activity-type">${capitalize(a.type)}</div>
         <div>${a.minutes} min</div>
         <div>${new Date(a.date).toLocaleString()}</div>
     `;
