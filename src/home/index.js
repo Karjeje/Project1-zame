@@ -1,3 +1,3 @@
-import "../styles/styles.css";
+import "./styles.css";
 
 console.log("Template");
