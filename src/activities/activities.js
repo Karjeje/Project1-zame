@@ -98,3 +98,18 @@ function renderList(activities) {
       listEl.appendChild(item);
     });
 }
+
+//Main render function
+function render(filterType = null) {
+  const activities = loadActivities();
+
+  renderFilters(activities);
+
+  const filtered =
+    filterType === null ? activities : activities.filter((a) => a.type === filterType);
+
+  renderList(filtered);
+}
+
+//Initial render
+render();
