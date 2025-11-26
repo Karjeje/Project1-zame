@@ -60,3 +60,21 @@ saveBtn.addEventListener("click", () => {
   modal.classList.add("hidden");
   render();
 });
+
+//Render filters
+function renderFilters(activities) {
+  const types = ["All", ...new Set(activities.map((a) => a.type))];
+
+  filtersEl.innerHTML = "";
+  types.forEach((type) => {
+    const btn = document.createElement("div");
+    btn.classList.add("filter");
+    btn.textContent = type;
+
+    btn.addEventListener("click", () => {
+      render(type === "All" ? null : type);
+    });
+
+    filtersEl.appendChild(btn);
+  });
+}
