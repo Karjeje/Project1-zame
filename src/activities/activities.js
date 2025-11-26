@@ -78,3 +78,23 @@ function renderFilters(activities) {
     filtersEl.appendChild(btn);
   });
 }
+
+//Render activity list
+function renderList(activities) {
+  listEl.innerHTML = "";
+
+  activities
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .forEach((a) => {
+      const item = document.createElement("div");
+      item.classList.add("activity-item");
+
+      item.innerHTML = `
+        <div class="activity-type">${a.type}</div>
+        <div>${a.minutes} min</div>
+        <div>${new Date(a.date).toLocaleString()}</div>
+    `;
+
+      listEl.appendChild(item);
+    });
+}
