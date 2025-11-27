@@ -34,3 +34,23 @@ function groupByWeek(activities, type) {
 
   return weeks;
 }
+
+//Draw graph on canvas
+function drawGraph(weekData) {
+  const canvas = document.getElementById("progress-canvas");
+  const ctx = canvas.getContext("2d");
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  const entries = Object.entries(weekData).sort(([a], [b]) => new Date(a) - new Date(b));
+
+  if (entries.length === 0) {
+    ctx.font = "20px sans-serif";
+    ctx.fillText = ("No data for this activity type", 20, 50);
+    return;
+  }
+
+  const maxMinutes = Math.max(...entries.map((e) => e[1]));
+  const barWidth = 50;
+  const gap = 20;
+}
