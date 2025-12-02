@@ -6,6 +6,13 @@ function cap(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
+function formatDateLocal(d) {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
+
 //Load activities
 function loadActivities() {
   return JSON.parse(localStorage.getItem("activities")) || [];
@@ -19,9 +26,11 @@ function getTypes(activities) {
 //Group activities into weeks
 function getWeekStart(date) {
   const d = new Date(date);
-  const day = d.getDay();
-  const diff = d.getDate() - day + 1;
-  return new Date(d.setDate(diff));
+  const jsDay = d.getDay(); // 0–6 (Sun–Sat)
+  const mondayBased = (jsDay + 6) % 7; // 0–6 (Mon–Sun)
+
+  d.setDate(d.getDate() - mondayBased);
+  return d;
 }
 
 function groupByWeek(activities, type) {
@@ -31,7 +40,7 @@ function groupByWeek(activities, type) {
 
   filtered.forEach((a) => {
     const weekStart = getWeekStart(a.date);
-    const key = weekStart.toISOString().split("T")[0];
+    const key = formatDateLocal(weekStart);
 
     if (!weeks[key]) weeks[key] = 0;
 
