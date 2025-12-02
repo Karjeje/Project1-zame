@@ -53,4 +53,19 @@ function drawGraph(weekData) {
   const maxMinutes = Math.max(...entries.map((e) => e[1]));
   const barWidth = 50;
   const gap = 20;
+
+  entries.forEach(([week, minutes], i) => {
+    const x = i * (barWidth + gap) + 50;
+    const h = (minutes / maxMinutes) * 300;
+
+    ctx.fillStyle = "#4e79a7";
+    ctx.fillRect(x, 350 - h, barWidth, h);
+
+    ctx.fillStyle = "black";
+    ctx.font = "12px sans-serif";
+    ctx.fillText(week, x - 10, 370);
+
+    const hours = (minutes / 60).toFixed(1);
+    ctx.fillText(hours + "h", x + 5, 350 - h - 5);
+  });
 }
