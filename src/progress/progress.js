@@ -1,5 +1,11 @@
 import "./progress.css";
 
+//Helper functions
+function cap(str) {
+  if (!str) return "";
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
 //Load activities
 function loadActivities() {
   return JSON.parse(localStorage.getItem("activities")) || [];
