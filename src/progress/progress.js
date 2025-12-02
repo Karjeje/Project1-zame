@@ -87,3 +87,10 @@ function renderTabs(types) {
     tabsEl.appendChild(t);
   });
 }
+
+//Render graph
+function renderGraph(type) {
+  const activities = loadActivities();
+  const weekData = groupByWeek(activities, type);
+  drawGraph(weekData);
+}
