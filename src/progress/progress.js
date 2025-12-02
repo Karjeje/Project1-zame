@@ -69,3 +69,21 @@ function drawGraph(weekData) {
     ctx.fillText(hours + "h", x + 5, 350 - h - 5);
   });
 }
+
+//Render tabs
+function renderTabs(types) {
+  const tabsEl = document.getElementById("type-tabs");
+  tabsEl.innerHTML = "";
+
+  types.forEach((type) => {
+    const t = document.createElement("div");
+    t.classList.add("tab");
+    t.textContent = cap(type);
+
+    t.addEventListener("click", () => {
+      renderGraph(type);
+    });
+
+    tabsEl.appendChild(t);
+  });
+}
