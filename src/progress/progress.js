@@ -94,3 +94,15 @@ function renderGraph(type) {
   const weekData = groupByWeek(activities, type);
   drawGraph(weekData);
 }
+
+//Initialize
+function init() {
+  const activities = loadActivities();
+  const types = getTypes(activities);
+
+  renderTabs(types);
+
+  if (types.length > 0) renderGraph(types[0]);
+}
+
+init();
