@@ -102,8 +102,10 @@ function renderList(activities) {
         <div>${a.minutes} min</div>
         <div>${new Date(a.date).toLocaleString()}</div>
 
-        <button class="edit-button">Edit</button>
-        <button class="delete-button">X</button>
+        <div class="actions">
+          <button class="edit-button">Edit</button>
+          <button class="delete-button">X</button>
+        </div>
     `;
 
       listEl.appendChild(item);
