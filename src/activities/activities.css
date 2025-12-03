@@ -83,3 +83,30 @@ body {
 .hidden {
   display: none;
 }
+
+.edit-button,
+.delete-button {
+  padding: 6px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  background: #eee;
+}
+
+#new-activity-btn {
+  padding: 10px 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.edit-button:hover {
+  background: #d4f0ff;
+}
+
+.delete-button:hover {
+  background: #ffdddd;
+}
+
+#new-activity-btn:hover {
+  background-color: rgb(189, 185, 185);
+}
