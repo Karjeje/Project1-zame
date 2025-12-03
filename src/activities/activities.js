@@ -29,6 +29,7 @@ const dateInput = document.getElementById("activity-datetime");
 
 //Modal controls
 newBtn.addEventListener("click", () => {
+  saveBtn.onclick = defaultSave;
   modal.classList.remove("hidden");
 });
 
@@ -37,7 +38,7 @@ cancelBtn.addEventListener("click", () => {
 });
 
 //Save activity
-saveBtn.addEventListener("click", () => {
+function defaultSave() {
   const type = selectInput.value;
   const minutes = Number(minInput.value);
   const date = dateInput.value;
@@ -59,7 +60,9 @@ saveBtn.addEventListener("click", () => {
   saveActivities(activities);
   modal.classList.add("hidden");
   render();
-});
+
+  saveBtn.onclick = defaultSave;
+}
 
 //Helper functions
 function capitalize(str) {
@@ -98,9 +101,46 @@ function renderList(activities) {
         <div class="activity-type">${capitalize(a.type)}</div>
         <div>${a.minutes} min</div>
         <div>${new Date(a.date).toLocaleString()}</div>
+
+        <button class="edit-button">Edit</button>
+        <button class="delete-button">X</button>
     `;
 
       listEl.appendChild(item);
+
+      item.querySelector(".delete-button").addEventListener("click", () => {
+        const activities = loadActivities();
+        const updated = activities.filter((x) => x.id !== a.id);
+        saveActivities(updated);
+        render();
+      });
+
+      item.querySelector(".edit-button").addEventListener("click", () => {
+        selectInput.value = a.type;
+        minInput.value = a.minutes;
+        dateInput.value = a.date;
+
+        modal.classList.remove("hidden");
+
+        saveBtn.onclick = () => {
+          const activities = loadActivities();
+
+          const updatedActivities = activities.map((x) =>
+            x.id === a.id
+              ? {
+                  ...x,
+                  type: selectInput.value,
+                  minutes: Number(minInput.value),
+                  date: dateInput.value,
+                }
+              : x
+          );
+
+          saveActivities(updatedActivities);
+          modal.classList.add("hidden");
+          render();
+        };
+      });
     });
 }
 
