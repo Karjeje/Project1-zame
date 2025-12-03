@@ -3,9 +3,69 @@ body {
   font-family: sans-serif;
 }
 
-#type-tabs {
+.topbar {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  position: relative;
+  height: 60px;
+  padding: 20px;
+  background: #eee;
+}
+
+.topbar .links {
+  position: absolute;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.topbar span {
+  font-size: 30px;
+}
+
+.link {
+  text-decoration: none;
+  color: black;
+  font-size: 18px;
+}
+
+.content {
+  display: flex;
+  padding: 20px;
+}
+
+/* Tabs on the left (like filters) */
+.tabs {
+  width: 150px;
+  background: #f7f7f7;
+  border-right: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  gap: 8px;
+}
+
+.tab {
+  padding: 8px;
+  cursor: pointer;
+  background: #fff;
+  border: 1px solid #ddd;
+}
+
+.tab:hover {
+  background: #eee;
+}
+
+/* Graph container */
+.graph-area {
+  flex: 1;
+  padding: 20px;
+}
+
+#progress-canvas {
+  border: 1px solid #ccc;
+  background: #fafafa;
 }
