@@ -11,6 +11,23 @@ body {
   background: #eee;
 }
 
+.links {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.topbar span {
+  font-size: 30px;
+}
+
+.link {
+  text-decoration: none;
+  color: black;
+  font-size: 18px;
+}
+
 .content {
   display: flex;
 }
