@@ -33,22 +33,22 @@ function getWeekStart(date) {
   return d;
 }
 
-function groupByWeek(activities, type) {
-  const filtered = activities.filter((a) => a.type === type);
+// function groupByWeek(activities, type) {
+//   const filtered = activities.filter((a) => a.type === type);
 
-  const weeks = {};
+//   const weeks = {};
 
-  filtered.forEach((a) => {
-    const weekStart = getWeekStart(a.date);
-    const key = formatDateLocal(weekStart);
+//   filtered.forEach((a) => {
+//     const weekStart = getWeekStart(a.date);
+//     const key = formatDateLocal(weekStart);
 
-    if (!weeks[key]) weeks[key] = 0;
+//     if (!weeks[key]) weeks[key] = 0;
 
-    weeks[key] += a.minutes;
-  });
+//     weeks[key] += a.minutes;
+//   });
 
-  return weeks;
-}
+//   return weeks;
+// }
 
 //Draw graph on canvas
 function drawGraph(weekData) {
@@ -57,13 +57,7 @@ function drawGraph(weekData) {
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  const entries = Object.entries(weekData).sort(([a], [b]) => new Date(a) - new Date(b));
-
-  if (entries.length === 0) {
-    ctx.font = "20px sans-serif";
-    ctx.fillText = ("No data for this activity type", 20, 50);
-    return;
-  }
+  const entries = Object.entries(weekData);
 
   const maxMinutes = Math.max(...entries.map((e) => e[1]));
   const barWidth = 50;
@@ -78,7 +72,7 @@ function drawGraph(weekData) {
 
     ctx.fillStyle = "black";
     ctx.font = "12px sans-serif";
-    ctx.fillText(week, x - 10, 370);
+    ctx.fillText(week, x - 5, 370);
 
     const hours = (minutes / 60).toFixed(1);
     ctx.fillText(hours + "h", x + 5, 350 - h - 5);
@@ -121,3 +115,39 @@ function init() {
 }
 
 init();
+
+//Attempt at making a better graph
+function buildLast12Weeks() {
+  const weeks = [];
+  const today = new Date();
+
+  const currentWeekStart = getWeekStart(today);
+
+  for (let i = 11; i >= 0; i--) {
+    const d = new Date(currentWeekStart);
+    d.setDate(d.getDate() - i * 7);
+    weeks.push(formatDateLocal(d));
+  }
+
+  return weeks;
+}
+
+function groupByWeek(activities, type) {
+  const filtered = activities.filter((a) => a.type === type);
+
+  const rawWeeks = {};
+
+  filtered.forEach((a) => {
+    const key = formatDateLocal(getWeekStart(a.date));
+    rawWeeks[key] = (rawWeeks[key] || 0) + a.minutes;
+  });
+
+  const fullWeeks = {};
+  const last12 = buildLast12Weeks();
+
+  last12.forEach((week) => {
+    fullWeeks[week] = rawWeeks[week] || 0;
+  });
+
+  return fullWeeks;
+}
