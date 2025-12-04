@@ -145,6 +145,12 @@ function renderTabs(types) {
     t.textContent = cap(type);
 
     t.addEventListener("click", () => {
+      document
+        .querySelectorAll("#type-tabs .tab")
+        .forEach((tab) => tab.classList.remove("selected"));
+
+      t.classList.add("selected");
+
       renderGraph(type);
     });
 
