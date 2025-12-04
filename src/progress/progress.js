@@ -13,19 +13,34 @@ function formatDateLocal(d) {
   return `${y}-${m}-${day}`;
 }
 
-function formatWeekRange(startingDate) {
+function formatWeekStart(startingDate) {
   const startingD = new Date(startingDate);
 
-  const endingD = new Date(startingD);
-  endingD.setDate(endingD.getDate() + 6);
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
 
   const startingDay = String(startingD.getDate()).padStart(2, "0");
-  const startingMonth = String(startingD.getMonth() + 1).padStart(2, "0");
+  const startingMonth = months[startingD.getMonth()];
 
-  const endingDay = String(endingD.getDate()).padStart(2, "0");
-  const endingMonth = String(endingD.getMonth() + 1).padStart(2, "0");
+  // const endingD = new Date(startingD);
+  // endingD.setDate(endingD.getDate() + 6);
 
-  return `${startingDay}/${startingMonth}-${endingDay}/${endingMonth}`;
+  // const endingDay = String(endingD.getDate()).padStart(2, "0");
+  // const endingMonth = months[endingD.getMonth()];
+
+  return `${startingMonth} ${startingDay}`;
 }
 
 //Load activities
