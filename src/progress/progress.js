@@ -13,6 +13,21 @@ function formatDateLocal(d) {
   return `${y}-${m}-${day}`;
 }
 
+function formatWeekRange(startingDate) {
+  const startingD = new Date(startingDate);
+
+  const endingD = new Date(startingD);
+  endingD.setDate(endingD.getDate() + 6);
+
+  const startingDay = String(startingD.getDate()).padStart(2, "0");
+  const startingMonth = String(startingD.getMonth() + 1).padStart(2, "0");
+
+  const endingDay = String(endingD.getDate()).padStart(2, "0");
+  const endingMonth = String(endingD.getMonth() + 1).padStart(2, "0");
+
+  return `${startingDay}/${startingMonth}-${endingDay}/${endingMonth}`;
+}
+
 //Load activities
 function loadActivities() {
   return JSON.parse(localStorage.getItem("activities")) || [];
@@ -152,6 +167,7 @@ function groupByWeek(activities, type) {
   return fullWeeks;
 }
 
+//Sharper graphics
 function setupCanvas(canvas) {
   const dpr = window.devicePixelRatio || 1;
   const rect = canvas.getBoundingClientRect();
