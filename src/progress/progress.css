@@ -37,7 +37,6 @@ body {
   padding: 20px;
 }
 
-/* Tabs on the left (like filters) */
 .tabs {
   width: 150px;
   background: #f7f7f7;
@@ -59,7 +58,6 @@ body {
   background: #eee;
 }
 
-/* Graph container */
 .graph-area {
   flex: 1;
   padding: 20px;
@@ -68,4 +66,7 @@ body {
 #progress-canvas {
   border: 1px solid #ccc;
   background: #fafafa;
+  width: 920px;
+  height: 400px;
+  display: block;
 }
