@@ -100,9 +100,11 @@ function drawGraph(weekData) {
     ctx.fillStyle = "#4e79a7";
     ctx.fillRect(x, 350 - h, barWidth, h);
 
+    const labels = Object.keys(weekData).map((iso) => formatWeekStart(iso));
+
     ctx.fillStyle = "black";
     ctx.font = "12px sans-serif";
-    ctx.fillText(week, x - 5, 370);
+    ctx.fillText(labels[i], x + 6, 370);
 
     const hours = (minutes / 60).toFixed(1);
     ctx.fillText(hours + "h", x + 5, 350 - h - 5);
