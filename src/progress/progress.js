@@ -89,9 +89,34 @@ function drawGraph(weekData) {
 
   const entries = Object.entries(weekData);
 
-  const maxMinutes = Math.max(...entries.map((e) => e[1]));
+  let maxMinutes = Math.max(...entries.map((e) => e[1]));
+  if (maxMinutes < 180) {
+    maxMinutes = 180;
+  }
+  const maxHours = maxMinutes / 60;
+  console.log(maxHours);
+  const step = Math.ceil(maxHours / 3);
+  console.log(step);
   const barWidth = 50;
   const gap = 20;
+
+  ctx.strokeStyle = "#444";
+  ctx.beginPath();
+  ctx.moveTo(40, 350);
+  ctx.lineTo(40, 50);
+  ctx.stroke();
+
+  for (let h = 0; h <= maxHours; h += step) {
+    const y = 350 - (h / maxHours) * 300;
+
+    ctx.fillText(h + "h", 5, y + 4);
+
+    ctx.beginPath();
+    ctx.moveTo(40, y);
+    ctx.lineTo(900, y);
+    ctx.strokeStyle = "#ddd";
+    ctx.stroke();
+  }
 
   entries.forEach(([week, minutes], i) => {
     const x = i * (barWidth + gap) + 50;
@@ -106,8 +131,8 @@ function drawGraph(weekData) {
     ctx.font = "12px sans-serif";
     ctx.fillText(labels[i], x + 6, 370);
 
-    const hours = (minutes / 60).toFixed(1);
-    ctx.fillText(hours + "h", x + 5, 350 - h - 5);
+    // const hours = (minutes / 60).toFixed(1);
+    // ctx.fillText(hours + "h", x + 5, 350 - h - 5);
   });
 }
 
