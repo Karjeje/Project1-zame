@@ -94,19 +94,17 @@ function drawGraph(weekData) {
     maxMinutes = 180;
   }
   const maxHours = maxMinutes / 60;
-  console.log(maxHours);
   const step = Math.ceil(maxHours / 3);
-  console.log(step);
   const barWidth = 50;
   const gap = 20;
 
   ctx.strokeStyle = "#444";
   ctx.beginPath();
   ctx.moveTo(40, 350);
-  ctx.lineTo(40, 50);
+  ctx.lineTo(40, 20);
   ctx.stroke();
 
-  for (let h = 0; h <= maxHours; h += step) {
+  for (let h = 0; h <= maxHours + 6; h += step) {
     const y = 350 - (h / maxHours) * 300;
 
     ctx.fillText(h + "h", 5, y + 4);
