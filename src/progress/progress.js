@@ -53,7 +53,7 @@ function getWeekStart(date) {
 //Draw graph on canvas
 function drawGraph(weekData) {
   const canvas = document.getElementById("progress-canvas");
-  const ctx = canvas.getContext("2d");
+  const ctx = setupCanvas(canvas);
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -150,4 +150,17 @@ function groupByWeek(activities, type) {
   });
 
   return fullWeeks;
+}
+
+function setupCanvas(canvas) {
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+
+  canvas.width = rect.width * dpr;
+  canvas.height = rect.height * dpr;
+
+  const ctx = canvas.getContext("2d");
+  ctx.scale(dpr, dpr);
+
+  return ctx;
 }
