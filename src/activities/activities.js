@@ -159,7 +159,7 @@ function render(filterType = null) {
   renderFilters(activities);
 
   const filtered =
-    filterType === null ? activities : activities.filter((a) => a.type === filterType);
+    currentFilter === "All" ? activities : activities.filter((a) => a.type === currentFilter);
 
   renderList(filtered);
 }
