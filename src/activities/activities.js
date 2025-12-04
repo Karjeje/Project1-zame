@@ -70,6 +70,9 @@ function capitalize(str) {
 }
 
 //Render filters
+
+let currentFilter = "All";
+
 function renderFilters(activities) {
   const types = ["All", ...new Set(activities.map((a) => a.type))];
 
@@ -79,7 +82,10 @@ function renderFilters(activities) {
     btn.classList.add("filter");
     btn.textContent = capitalize(type);
 
+    if (type === currentFilter) btn.classList.add("selected");
+
     btn.addEventListener("click", () => {
+      currentFilter = type;
       render(type === "All" ? null : type);
     });
 

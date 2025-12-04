@@ -32,6 +32,11 @@ body {
   display: flex;
 }
 
+.filter.selected {
+  background-color: rgb(112, 112, 195);
+  color: whitesmoke;
+}
+
 .filters {
   width: 150px;
   background: #f7f7f7;
@@ -40,11 +45,15 @@ body {
 }
 
 .filter {
+  display: block;
+  width: 100%;
   padding: 8px;
   cursor: pointer;
+  box-sizing: border-box;
 }
 .filter:hover {
   background: #ddd;
+  color: black;
 }
 
 .activity-list {
